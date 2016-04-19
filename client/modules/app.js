@@ -49,6 +49,11 @@ myApp.factory('customerFactory', ['$http', function($http) {
 			callback(response);
 		});
 	};
+
+	factory.destroy = function(_id) {
+		$http.delete('/customers/' + _id);
+	};
+
 	return factory;
 }]);
 
@@ -177,7 +182,11 @@ myApp.controller('customersController', ['$scope', '$location', 'locationService
 			$scope.errors = errors.data.errors.name;
 		});
 		$scope.newCustomer = {};
-		$scope.init();
+	};
+
+	$scope.destroy = function(customer) {
+		console.log(customer);
+		customerFactory.destroy(customer._id);
 	};
 
 }]);

@@ -25,12 +25,18 @@
 				<tr>
 					<th>Customer Name</th>
 					<th>Date</th>
+					<th>Actions</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="customer in customers | orderBy: '-created_at'">
+				<tr ng-repeat="customer in customers | orderBy: '-created_at' | filter: filter_customers">
 					<td ng-cloak>{{ customer.name }}</td>
 					<td ng-cloak>{{ customer.created_at | date: 'MMMM d, y' }}</td>
+					<td>
+						<form>
+							<button ng-click="destroy(customer)" class="btn btn-danger">Remove Customer</button>
+						</form>
+					</td>
 				</tr>
 			</tbody>
 		</table>

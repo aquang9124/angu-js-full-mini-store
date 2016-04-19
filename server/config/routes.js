@@ -11,6 +11,10 @@ module.exports = function(app) {
 		customers.create(req, res);
 	});
 
+	app.delete('/customers/:id', function(req, res) {
+		customers.destroy(req, res);
+	});
+
 	app.get('/products', function(req, res) {
 		products.index(req, res);
 	});
