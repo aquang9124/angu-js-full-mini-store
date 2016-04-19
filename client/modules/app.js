@@ -1,5 +1,5 @@
 // Module
-myApp = angular.module('myApp', ['ngRoute']);
+myApp = angular.module('myApp', ['ngRoute', 'angularMoment']);
 	
 	myApp.config(function($routeProvider) {
 		$routeProvider
@@ -130,6 +130,7 @@ myApp.controller('ordersController', ['$scope', '$location', 'locationService', 
 	locationService.currentUrl = $location.url();
 	$scope.newOrder = {};
 	$scope.init = function() {
+		
 		customerFactory.index(function(data) {
 			$scope.customers = data;
 		});
@@ -139,15 +140,23 @@ myApp.controller('ordersController', ['$scope', '$location', 'locationService', 
 		});
 	};
 
+	$scope.show = function() {
+		orderFactory.index(function(data) {
+			$scope.orders = data;
+		});
+	};
+
 	$scope.init();
-	
+	$scope.show();
+
 	$scope.create = function() {
 
 		orderFactory.create($scope.newOrder, function(errors) {
 			$scope.errors = errors;
 		});
+		$scope.show();
 		$scope.newOrder = {};
-		$scope.init();
+		
 	};
 
 }]);

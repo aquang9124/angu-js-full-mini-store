@@ -17,7 +17,7 @@ module.exports = {
 
 		Product.find({ product_name: req.body.product_name }).exec(function(err, product) {
 
-			if (product[0].qty - req.body.order_qty > 0) 
+			if (product[0].qty - req.body.order_qty >= 0) 
 			{
 				var newQty = product[0].qty - req.body.order_qty;
 
