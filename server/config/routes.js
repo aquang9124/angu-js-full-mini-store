@@ -15,8 +15,16 @@ module.exports = function(app) {
 		products.index(req, res);
 	});
 
+	app.get('/products/:name', function(req, res) {
+		products.show(req, res);
+	});
+
 	app.post('/products', function(req, res) {
 		products.create(req, res);
+	});
+
+	app.put('/products/:id', function(req, res) {
+		products.update(req, res);
 	});
 
 	app.get('/orders', function(req, res) {

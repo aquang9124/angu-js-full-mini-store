@@ -76,7 +76,7 @@ myApp.factory('productFactory', ['$http', function($http) {
 myApp.factory('orderFactory', ['$http', function($http) {
 	var factory = {};
 	var orders = [];
-
+	var product;
 	factory.index = function(callback) {
 		$http.get('/orders').success(function (response) {
 			orders = response;
@@ -85,11 +85,26 @@ myApp.factory('orderFactory', ['$http', function($http) {
 	};
 
 	factory.create = function(order, callback) {
+		$http.get('/products/' + order.product_name).success(function(response) {
+			product = response;
+			
+			if (product.qty - order.order_qty > 0) {
+				var newQty = product.qty - order.order_qty;
+				console.log(newQty);
+				$http.put('/products/' + product._id, { qty: newQty });
 
-		$http.post('/orders', { customer_name: order.customer_name, order_qty: order.order_qty, product_name: order.product_name })
-		.then(function error(response) {
-			callback(response);
+				$http.post('/orders', { customer_name: order.customer_name, order_qty: order.order_qty, product_name: order.product_name })
+				.then(function error(response) {
+					callback(response);
+				});
+			}
+			else {
+				return false;
+			}
 		});
+
+
+		
 	};
 	return factory;
 }]);
@@ -99,8 +114,10 @@ myApp.controller('mainController', ['$scope', '$location', 'locationService', fu
 	
 }]);
 
-myApp.controller('dashesController', ['$scope', '$location', 'locationService', function($scope, $location, locationService) {
+myApp.controller('dashesController', ['$scope', '$location', 'locationService', 'customerFactory', function($scope, $location, locationService, customerFactory) {
 	locationService.currentUrl = $location.url();
+
+
 
 }]);
 
@@ -127,7 +144,7 @@ myApp.controller('productsController', ['$scope', '$location', 'locationService'
 
 myApp.controller('ordersController', ['$scope', '$location', 'locationService', 'productFactory', 'customerFactory', 'orderFactory', function($scope, $location, locationService, productFactory, customerFactory, orderFactory) {
 	locationService.currentUrl = $location.url();
-
+	$scope.newOrder = {};
 	$scope.init = function() {
 		customerFactory.index(function(data) {
 			$scope.customers = data;
