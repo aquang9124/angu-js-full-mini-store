@@ -72,6 +72,27 @@ myApp.factory('productFactory', ['$http', function($http) {
 	};
 	return factory;
 }]);
+
+myApp.factory('orderFactory', ['$http', function($http) {
+	var factory = {};
+	var orders = [];
+
+	factory.index = function(callback) {
+		$http.get('/orders').success(function (response) {
+			orders = response;
+			callback(orders);
+		});
+	};
+
+	factory.create = function(order, callback) {
+
+		$http.post('/orders', { customer_name: order.customer_name, order_qty: order.order_qty, product_name: order.product_name })
+		.then(function error(response) {
+			callback(response);
+		});
+	};
+	return factory;
+}]);
 // Controllers
 myApp.controller('mainController', ['$scope', '$location', 'locationService', function($scope, $location, locationService) {
 	$scope.urlPath = locationService;
@@ -104,7 +125,7 @@ myApp.controller('productsController', ['$scope', '$location', 'locationService'
 
 }]);
 
-myApp.controller('ordersController', ['$scope', '$location', 'locationService', 'productFactory', 'customerFactory', function($scope, $location, locationService, productFactory, customerFactory) {
+myApp.controller('ordersController', ['$scope', '$location', 'locationService', 'productFactory', 'customerFactory', 'orderFactory', function($scope, $location, locationService, productFactory, customerFactory, orderFactory) {
 	locationService.currentUrl = $location.url();
 
 	$scope.init = function() {
@@ -118,6 +139,14 @@ myApp.controller('ordersController', ['$scope', '$location', 'locationService', 
 	};
 
 	$scope.init();
+
+	$scope.create = function() {
+		orderFactory.create($scope.newOrder, function(errors) {
+			$scope.errors = errors;
+		});
+		$scope.newOrder = {};
+		$scope.init();
+	};
 
 }]);
 

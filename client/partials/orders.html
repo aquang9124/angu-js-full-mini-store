@@ -8,14 +8,14 @@
 			</select>
 		</div>
 		<div class="form-group">
-			<label>Quantity:</label>
-			<input type="number" ng-model="newOrder.order_qty" class="form-control">
-		</div>
-		<div class="form-group">
 			<label>Product:</label>
 			<select ng-model="newOrder.product_name" class="form-control">
 				<option ng-repeat="product in products">{{ product.product_name }}</option>
 			</select>
+		</div>
+		<div class="form-group">
+			<label>Quantity:</label>
+			<input type="number" ng-model="newOrder.order_qty" class="form-control">
 		</div>
 		<div class="form-group">
 			<button class="btn btn-primary">Place Order</button>

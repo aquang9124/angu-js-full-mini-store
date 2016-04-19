@@ -18,4 +18,12 @@ module.exports = function(app) {
 	app.post('/products', function(req, res) {
 		products.create(req, res);
 	});
+
+	app.get('/orders', function(req, res) {
+		orders.index(req, res);
+	});
+
+	app.post('/orders', function(req, res) {
+		orders.create(req, res);
+	});
 }
