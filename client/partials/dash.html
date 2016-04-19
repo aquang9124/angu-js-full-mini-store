@@ -14,7 +14,7 @@
 
 	<h3><u>Show All Products<u></h3>
 	<div id="button-wrapper">
-		<button class="btn btn-default" ng-click="maxProducts=customers.length" ng-show="maxProducts <= 4">Show All</button>
+		<button class="btn btn-default" ng-click="maxProducts=products.length" ng-show="maxProducts <= 4">Show All</button>
 		<button class="btn btn-default" ng-click="maxProducts=4" ng-show="maxProducts > 4">Limit Entries</button>
 	</div>
 </div>
@@ -31,7 +31,7 @@
 		<h3><u>Recent Orders</u></h3>
 		<p class="big-p" ng-repeat="order in orders | limitTo: maxOrders">{{ order.customer_name }} purchased {{ order.order_qty }} {{ order.product_name }}(s) (<span am-time-ago="order.created_at"></span>)</p>
 		<div id="button-wrapper">
-			<button class="btn btn-default" ng-click="maxOrders=customers.length" ng-show="maxOrders <= 4">Show All</button>
+			<button class="btn btn-default" ng-click="maxOrders=orders.length" ng-show="maxOrders <= 4">Show All</button>
 			<button class="btn btn-default" ng-click="maxOrders=4" ng-show="maxOrders > 4">Limit Entries</button>
 		</div>
 	</div>
