@@ -22,7 +22,13 @@ textarea {
 
 .pics {
   width: 100%;
-  min-height: 50%;
   max-height: 50%; }
+
+.big-p {
+  font-size: 1.4em; }
+
+#button-wrapper {
+  margin-top: 10px;
+  margin-bottom: 10px; }
 
 /*# sourceMappingURL=app.css.map */

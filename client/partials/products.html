@@ -33,6 +33,6 @@
 <div ng-cloak class="col-md-2 text-center" ng-repeat="product in products | filter: filter_products">
 	<img src="{{ product.image_url }}" alt="An Image" class="pics">
 	<p>{{ product.product_name }}</p>
-	<p ng-if="product.qty > 0"><small>({{ product.qty }} left)</small></p>
+	<p ng-if="product.qty > 0"><small>({{ product.qty }} left in stock)</small></p>
 	<p ng-if="product.qty === 0" class="errors">None left in stock</p>
 </div>

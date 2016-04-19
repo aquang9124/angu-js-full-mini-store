@@ -23,7 +23,6 @@ module.exports = {
 	},
 
 	destroy: function(req, res) {
-		console.log(req.params.id);
 		Customer.findByIdAndRemove(req.params.id, function(err) {
 			if (err) {
 				console.log(err);

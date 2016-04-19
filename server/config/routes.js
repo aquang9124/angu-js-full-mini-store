@@ -27,10 +27,6 @@ module.exports = function(app) {
 		products.create(req, res);
 	});
 
-	app.put('/products/:id', function(req, res) {
-		products.update(req, res);
-	});
-
 	app.get('/orders', function(req, res) {
 		orders.index(req, res);
 	});

@@ -103,9 +103,29 @@ myApp.controller('mainController', ['$scope', '$location', 'locationService', fu
 	
 }]);
 
-myApp.controller('dashesController', ['$scope', '$location', 'locationService', 'customerFactory', function($scope, $location, locationService, customerFactory) {
+myApp.controller('dashesController', ['$scope', '$location', 'locationService', 'customerFactory', 'productFactory', 'orderFactory', function($scope, $location, locationService, customerFactory, productFactory, orderFactory) {
 	locationService.currentUrl = $location.url();
+	$scope.maxItems = 3;
+	$scope.maxProducts = 4;
+	$scope.maxOrders = 4;
+	$scope.products = [];
+	$scope.customers = [];
 
+	$scope.init = function() {
+		productFactory.index(function(data) {
+			$scope.products = data;
+		});
+
+		customerFactory.index(function(data) {
+			$scope.customers = data;
+		});
+
+		orderFactory.index(function(data) {
+			$scope.orders = data;
+		});
+	};
+
+	$scope.init();
 
 
 }]);
@@ -113,6 +133,7 @@ myApp.controller('dashesController', ['$scope', '$location', 'locationService', 
 myApp.controller('productsController', ['$scope', '$location', 'locationService', 'productFactory', function($scope, $location, locationService, productFactory) {
 	locationService.currentUrl = $location.url();
 	$scope.newProduct = {};
+	$scope.products = [];
 	$scope.init = function() {
 		productFactory.index(function(data) {
 			$scope.products = data;
@@ -134,6 +155,7 @@ myApp.controller('productsController', ['$scope', '$location', 'locationService'
 myApp.controller('ordersController', ['$scope', '$location', 'locationService', 'productFactory', 'customerFactory', 'orderFactory', function($scope, $location, locationService, productFactory, customerFactory, orderFactory) {
 	locationService.currentUrl = $location.url();
 	$scope.newOrder = {};
+	$scope.orders = [];
 	$scope.init = function() {
 		
 		customerFactory.index(function(data) {
@@ -159,16 +181,16 @@ myApp.controller('ordersController', ['$scope', '$location', 'locationService', 
 		orderFactory.create($scope.newOrder, function(errors) {
 			$scope.errors = errors;
 		});
-		$scope.show();
 		$scope.newOrder = {};
-		
+		$scope.show();
+
 	};
 
 }]);
 
 myApp.controller('customersController', ['$scope', '$location', 'locationService', 'customerFactory', function($scope, $location, locationService, customerFactory) {
 	locationService.currentUrl = $location.url();
-
+	$scope.customers = [];
 	$scope.init = function() {
 		customerFactory.index(function(data) {
 			$scope.customers = data;
