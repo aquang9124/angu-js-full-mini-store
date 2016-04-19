@@ -14,12 +14,36 @@ module.exports = {
 	},
 
 	create: function(req, res) {
-		var order = new Order({ customer_name: req.body.customer_name, order_qty: req.body.order_qty, product_name: req.body.product_name });
-		
-		order.save(function(err) {
-			if (err) {
-				res.json(err);
+
+		Product.find({ product_name: req.body.product_name }).exec(function(err, product) {
+
+			if (product[0].qty - req.body.order_qty > 0) 
+			{
+				var newQty = product[0].qty - req.body.order_qty;
+
+				Product.findOneAndUpdate({ product_name: req.body.product_name}, { qty: newQty }).exec(function(err) 
+				{
+					var order = new Order({ customer_name: req.body.customer_name, order_qty: req.body.order_qty, product_name: req.body.product_name });
+					order.save(function(err)
+					{
+						if (err) 
+						{
+							res.json(err);
+						} 
+						else 
+						{
+							res.json({ status: true });
+						}
+
+					});
+
+				});
+			} 
+			else 
+			{
+				res.json({ status: false });
 			}
 		});
+		
 	},
 }
