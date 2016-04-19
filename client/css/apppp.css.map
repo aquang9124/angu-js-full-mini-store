@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,UAAW;EACV,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,IAAI;;AAGb,sBAAuB;EACtB,UAAU,EAAE,cAAc;EAC1B,aAAa,EAAE,cAAc;;AAI9B,OAAQ;EACP,KAAK,EAAE,KAAK;EACZ,WAAW,EAAE,IAAI",
+"sources": ["app.scss"],
+"names": [],
+"file": "apppp.css"
+}

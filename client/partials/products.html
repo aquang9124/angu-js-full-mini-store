@@ -1,0 +1,39 @@
+<div class="col-md-2">
+	<form>
+		<div class="form-group">
+			<input type="text" ng-model="filter_products" class="form-control" placeholder="Search...">
+		</div>
+		<div class="form-group">
+			<button class="btn btn-default" ng-click="filter()">Filter</button>
+		</div>
+	</form>
+	<hr>
+	<h4><u>Add a new product</u></h4>
+	<p ng-if="errors" class="errors text-center">{{ errors.message }}</p>
+	<form ng-submit="create()">
+		<div class="form-group">
+			<label>Name:</label>
+			<input type="text" ng-model="newProduct.product_name" placeholder="Name..." class="form-control" >
+		</div>
+		<div class="form-group">
+			<label>Image (url):</label>
+			<input type="text" ng-model="newProduct.image_url" class="form-control">
+		</div>
+		<div class="form-group">
+			<label>Description:</label>
+			<textarea ng-model="newProduct.description" class="form-control" rows="5"></textarea>
+		</div>
+		<div class="form-group">
+			<label>Initial Qty:</label>
+			<input type="number" ng-model="newProduct.qty" class="form-control">
+		</div>
+		<div class="form-group">
+			<button class="btn btn-primary">Add Product</button>
+		</div>
+	</form>
+</div>
+<div class="col-md-2 text-center" ng-repeat="product in products">
+	<img src="{{ product.image_url }}" alt="An Image" class="pics">
+	<p ng-cloak>{{ product.product_name }}</p>
+	<p ng-cloak><small>({{ product.qty }} left)</small></p>
+</div>

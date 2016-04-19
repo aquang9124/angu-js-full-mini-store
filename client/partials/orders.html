@@ -1,0 +1,24 @@
+<div class="col-xs-12">
+	<h3><u>Add a new order</u></h3>
+	<form ng-submit="create()">
+		<div class="form-group">
+			<label>Customer Name:</label>
+			<select ng-model="newOrder.customer_name" class="form-control">
+				<option ng-repeat="customer in customers">{{ customer.name }}</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label>Quantity:</label>
+			<input type="number" ng-model="newOrder.order_qty" class="form-control">
+		</div>
+		<div class="form-group">
+			<label>Product:</label>
+			<select ng-model="newOrder.product_name" class="form-control">
+				<option ng-repeat="product in products">{{ product.product_name }}</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<button class="btn btn-primary">Place Order</button>
+		</div>
+	</form>
+</div>

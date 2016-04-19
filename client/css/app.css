@@ -1,0 +1,28 @@
+html, body {
+  width: 100%;
+  height: 100%; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 1em !important;
+  margin-bottom: 1em !important; }
+
+p {
+  margin: 0; }
+
+textarea {
+  resize: none !important; }
+
+.chosen {
+  color: #1a1a1a !important;
+  font-weight: bold; }
+
+.errors {
+  color: #990000;
+  margin-bottom: 1em; }
+
+.pics {
+  width: 100%;
+  min-height: 50%;
+  max-height: 50%; }
+
+/*# sourceMappingURL=app.css.map */
